@@ -1,6 +1,5 @@
 # Welcome to Python
 
-- Level 1
 - Attendance (Who am I)
   - Where are you streaming from?
   - What did you do before the bootcamp?
