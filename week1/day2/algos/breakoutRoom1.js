@@ -7,17 +7,6 @@
 
 // Walk-through
 
-// Breakout room members
-// Fill out members array with name
-
-var members = [
-  "Steven Wittkopf",
-  "Alex Lee",
-  "John Parker",
-  "Shivani Autar",
-  "Brock Ervin",
-]
-
 // ************************************************
 
 /*

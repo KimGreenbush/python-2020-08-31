@@ -81,23 +81,42 @@ var stringAcronymReturnValue = stringAcronym(stringAcronymTestCase)
 console.log(stringAcronymReturnValue)
 
 // WITHOUT USING.split()
-function stringAcronymManual(str, delim) {
+// function stringAcronymManual(str, delim) {
+//   let acronym = ""
+//   let wordsArr = []
+//   let temp = ""
+//   for (let i = 0; i < str.length; i++) {
+//     if (str[i] == delim) {
+//       wordsArr.push(temp)
+//       temp = ""
+//     } else if (i == str.length - 1) {
+//       wordsArr.push(temp)
+//       temp = ""
+//     } else {
+//       temp += str[i]
+//     }
+//   }
+//   for (let i = 0; i < wordsArr.length; i++) {
+//     acronym += wordsArr[i].toUpperCase().charAt(0)
+//   }
+//   return acronym
+// }
+
+//Try This
+function stringAcronym(str, delim) {
   let acronym = ""
-  let wordsArr = []
+  // let wordsArr = [];
   let temp = ""
   for (let i = 0; i < str.length; i++) {
     if (str[i] == delim) {
-      wordsArr.push(temp)
+      acronym += temp.charAt(0).toUpperCase()
       temp = ""
     } else if (i == str.length - 1) {
-      wordsArr.push(temp)
+      acronym += temp.charAt(0).toUpperCase()
       temp = ""
     } else {
       temp += str[i]
     }
-  }
-  for (let i = 0; i < wordsArr.length; i++) {
-    acronym += wordsArr[i].toUpperCase().charAt(0)
   }
   return acronym
 }
