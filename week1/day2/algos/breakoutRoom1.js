@@ -10,7 +10,13 @@
 // Breakout room members
 // Fill out members array with name
 
-var members = ["member name"]
+var members = [
+  "Steven Wittkopf",
+  "Alex Lee",
+  "John Parker",
+  "Shivani Autar",
+  "Brock Ervin",
+]
 
 // ************************************************
 
@@ -23,7 +29,11 @@ var members = ["member name"]
 */
 
 function reverseString(str) {
-  // code here
+  var newStr = ""
+  for (var x = str.length - 1; x >= 0; x--) {
+    newString += str[x]
+  }
+  return newStr
 }
 
 var reverseStringTestCase = "abc"
@@ -31,6 +41,14 @@ var reverseStringReturnValue = reverseString(reverseStringTestCase)
 console.log(reverseStringReturnValue)
 
 // ************************************************
+// def reverse(str):
+//   str = ""
+//   for i in s:
+//     str = i + str
+//   return str
+
+// #splicing
+// 'hello world'[::-1]
 
 /*
   Acronyms
@@ -47,11 +65,35 @@ console.log(reverseStringReturnValue)
 
 */
 
-function stringAcronym(str) {
-  // code here
+function stringAcronym0(str) {
+  let result = "",
+    grabFirst = true
+  for (let i = 0; i < str.length; i++) {
+    if (
+      grabFirst &&
+      ((str >= "a" && str <= "z") || (str >= "A" && str <= "Z"))
+    ) {
+      result += str[i].toUpperCase()
+      grabFirst = false
+    } else if (str[i] == " ") {
+      grabFirst = true
+    }
+  }
+  return result
 }
 
-var stringAcronymTestCase = "abc"
+function stringAcronym(str) {
+  let words = str.split(" ")
+  // split is a function attached to string objects that breaks it into an array
+  // it takes a delimiting character as an argument indicating where each split occurs.
+  let result = ""
+  for (let i = 0; i < words.length; i++) {
+    result += words[i][0].toUpperCase()
+  }
+  return result
+}
+
+var stringAcronymTestCase = "The quick brown fox, jumped over the lazy dog."
 var stringAcronymReturnValue = stringAcronym(stringAcronymTestCase)
 console.log(stringAcronymReturnValue)
 
@@ -66,7 +108,7 @@ console.log(stringAcronymReturnValue)
 */
 
 function caseInsensitiveCompare(str1, str2) {
-  // code here
+  return str1.toUpperCase() == str2.toUpperCase()
 }
 
 var caseInsensitiveCompareTestCase = "abc"

@@ -10,7 +10,7 @@
 // Breakout room members
 // Fill out members array with name
 
-var members = ["member name"]
+var members = ["jeffrey yi", "Gary J, Amy P." "Ling X."]
 
 // ************************************************
 
@@ -23,7 +23,14 @@ var members = ["member name"]
 */
 
 function reverseString(str) {
-  // code here
+  var newString= ""
+ for(var i=str.length-1; i>=0; i--){
+
+  newString += str[i]
+
+  }
+
+  return newString
 }
 
 var reverseStringTestCase = "abc"
@@ -49,6 +56,16 @@ console.log(reverseStringReturnValue)
 
 function stringAcronym(str) {
   // code here
+  str.toUpperCase()
+  var split_string = str.split();
+  var letters= []
+  for(let i = 0; i < split_string.length; i++){
+    letters += split_string[i][0]
+
+  }
+
+  joinStr = letters.join()
+return joinStr
 }
 
 var stringAcronymTestCase = "abc"

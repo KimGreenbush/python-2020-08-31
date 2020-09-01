@@ -10,8 +10,16 @@
 // Breakout room members
 // Fill out members array with name
 
-var members = ["member name"]
+var members = ["Luis Cardona, Stephen Lebel, Vikram Malhotra"]
 
+// 1. starting variables
+// 2. condition/control to check each iteration
+// 3. step, something to do after
+// for (start; stop; step) {
+
+for (var i = 0; i < 100; i++) {
+  console.log(i)
+}
 // ************************************************
 
 /*
@@ -23,13 +31,31 @@ var members = ["member name"]
 */
 
 function reverseString(str) {
-  // code here
+  // loop for
+  var newstring = ""
 }
 
 var reverseStringTestCase = "abc"
 var reverseStringReturnValue = reverseString(reverseStringTestCase)
 console.log(reverseStringReturnValue)
 
+//luisCardona
+function reverseString(str) {
+  var revS = ""
+  //              2       3>=0   i--
+  for (var i = str.length - 1; i >= 0; i--) {
+    console.log(str[i])
+    revS = revS + str[i]
+    // revS += str[i]
+    // console.log(revS)
+  }
+
+  console.log("revS: ", revS)
+  return revS
+}
+//                                   012
+var someReturnValue = reverseString("abc")
+console.log("someReturnValue: ", someReturnValue)
 // ************************************************
 
 /*
