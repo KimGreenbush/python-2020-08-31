@@ -7,6 +7,14 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Welcome to the dashboard {{ name_to_use_on_template }}!</h1>
+    <h1>Welcome to the dashboard {{ request.session.user_name }}!</h1>
+    <h2>My favorite drink is {{ request.session.fav_drink }}</h2>
+    <a href="/logout">Logout</a>
+
+    <form action="/add_drink" method="post">
+      {% csrf_token %}
+      <p>Add a drink<input type="text" name="new_drink" /></p>
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
