@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to 🔥Blazing Oven!🔥</h1>
+    <h2>Check out the chefs!</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Specialy</td>
+          <td>Foods</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for chef in chefzz %}
+        <tr>
+          <td>{{ chef.name }}</td>
+          <td>{{ chef.specialty }}</td>
+          <td>{{ chef.foods.all }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br />
+    <h2>Check out the menu!</h2>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Price</td>
+          <td>Description</td>
+          <td>Prepared By</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for food in foodzzz %}
+        <tr>
+          <td>{{ food.name }}</td>
+          <td>{{ food.price }}</td>
+          <td>{{ food.desc }}</td>
+          <td>{{ food.prepared_by.name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h3>Add a food to the menu</h3>
+    <form action="/foods/create" method="post">
+      {% csrf_token %}
+      <p>Name: <input type="text" name="food_name" /></p>
+      <p>Price: <input type="number" step="any" name="food_price" /></p>
+      <p>
+        Description:
+        <textarea name="food_description" cols="30" rows="10"></textarea>
+      </p>
+      <p>Select a chef</p>
+      <select name="chef_id">
+        {% for chef in chefzz %}
+        <option value="{{ chef.id }}">{{ chef.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Bake it!</button>
+    </form>
+    <br />
+    <h3>Add a chef</h3>
+    <form action="/chefs/create" method="post">
+      {% csrf_token %}
+      <p>Name: <input type="text" name="chef_name" /></p>
+      <p>Specialty: <input type="text" name="chef_specialty" /></p>
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>
