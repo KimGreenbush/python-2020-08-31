@@ -1,0 +1,28 @@
+/* * {
+  border: 1px solid red;
+} */
+
+h1 {
+  text-align: center;
+}
+
+body {
+  background-color: wheat;
+}
+form label {
+  width: 120px;
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+table td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}

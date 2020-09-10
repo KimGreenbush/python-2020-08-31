@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to 🔥Blazing Oven!🔥</h1>
+    <div class="flex">
+      <div>
+        <h2>Check out the chefs!</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Specialy</td>
+              <td>Foods</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for chef in chefzz %}
+            <tr>
+              <td>{{ chef.name }}</td>
+              <td>{{ chef.specialty }}</td>
+              <td>{{ chef.foods.all }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <h3>Add a chef</h3>
+        <form action="/chefs/create" method="post">
+          {% csrf_token %}
+          <div>
+            <label for="chef_name">Name: </label>
+            <input type="text" name="chef_name" />
+          </div>
+          <div>
+            <label for="chef_specialty">Specialty: </label>
+            <input type="text" name="chef_specialty" />
+          </div>
+          <button type="submit">Register a chef</button>
+        </form>
+      </div>
+      <div>
+        <h2>Check out the menu!</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Price</td>
+              <td>Description</td>
+              <td>Prepared By</td>
+              <td>Categories</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for food in foodzzz %}
+            <tr>
+              <td>{{ food.name }}</td>
+              <td>{{ food.price }}</td>
+              <td>{{ food.desc }}</td>
+              <td>{{ food.prepared_by.name }}</td>
+              <td>
+                <ul>
+                  {% for category in food.categories.all %}
+                  <li>{{ category.name }}</li>
+                  {% endfor %}
+                </ul>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <h3>Add a food to the menu</h3>
+        <form action="/foods/create" method="post">
+          {% csrf_token %}
+          <div>
+            <label for="food_name">Name: </label>
+            <input type="text" name="food_name" />
+          </div>
+          <div>
+            <label for="food_price">Price:</label>
+            <input type="number" step="any" name="food_price" />
+          </div>
+          <div>
+            <label for="food_description">Description:</label>
+            <input name="food_description" />
+          </div>
+          <div>
+            <label for="chef_id">Select a chef</label>
+            <select name="chef_id">
+              {% for chef in chefzz %}
+              <option value="{{ chef.id }}">{{ chef.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit">Add food!</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <h2>Check out the categories!</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Foods</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for category in categoriez %}
+          <tr>
+            <td>{{ category.name }}</td>
+            <td>
+              <ul>
+                {% for food in category.foods.all %}
+                <li>{{ food.name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h3>Add a category</h3>
+      <form action="/categories/create" method="post">
+        {% csrf_token %}
+        <div>
+          <label for="category_name">Name: </label>
+          <input type="text" name="category_name" />
+        </div>
+        <button type="submit">Add category!</button>
+      </form>
+    </div>
+    <div>
+      <h3>Add a category for a food</h3>
+      <form action="/foods/add_category" method="post">
+        {% csrf_token %}
+        <div>
+          <label for="category_id">Select a category</label>
+          <select name="category_id">
+            {% for category in categoriez %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="food_id">Select a food</label>
+          <select name="food_id">
+            {% for food in foodzzz %}
+            <option value="{{ food.id }}">{{ food.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit">Add it!</button>
+      </form>
+    </div>
+  </body>
+</html>
