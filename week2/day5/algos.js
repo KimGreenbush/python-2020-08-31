@@ -57,8 +57,56 @@ function updateInventory(newInv, currInv) {}
 // const strB3 = "noo"
 // const expected3 = false
 
-// const strA4 = "silent"
-// const strB4 = "listen"
-// const expected4 = true
+const strA4 = "silent"
+const strB4 = "listen"
+const expected4 = true
 
-function isAnagram(s1, s2) {}
+function isAnagram(s1, s2) {
+  if (s1.length !== s2.length) {
+    return false
+  }
+  // if (s1.length !== s2.length) return false
+
+  // return s1.length !== s2.length
+
+  var freq1 = {}
+  var freq2 = {}
+  // loop through strings
+  for (let i = 0; i < s1.length; i++) {
+    // track letter frequency
+    var singleLetterS1 = s1[i]
+    if (freq1.hasOwnProperty(singleLetterS1)) {
+      freq1[singleLetterS1] += 1
+    } else {
+      freq1[singleLetterS1] = 1
+    }
+
+    // track letter frequency
+    var singleLetterS2 = s2[i]
+    if (freq2.hasOwnProperty(singleLetterS2)) {
+      freq2[singleLetterS2] += 1
+    } else {
+      freq2[singleLetterS2] = 1
+    }
+  }
+  console.log(`freq1: `, freq1)
+  console.log(`freq2: `, freq2)
+
+  // verify that the objects have the same key values
+  for (var key in freq1) {
+    var value = freq1[key]
+    console.log(key, value)
+
+    if (freq2.hasOwnProperty(key) === false) {
+      return false
+    }
+
+    if (freq1[key] !== freq2[key]) {
+      return false
+    }
+  }
+
+  return true
+}
+
+console.log(isAnagram("silenteeecc", "listencccee"))
