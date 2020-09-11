@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to the Hello Pets!🐶</h1>
+    <div>
+      <h2>You are logged in as {{ logged_in_user.name }}</h2>
+      <img
+        src="{{ logged_in_user.profile_pic_url }}"
+        alt="profile pic"
+        style="height: 100px"
+      />
+    </div>
+    <hr />
+    <h3>List a pet</h3>
+    <form action="/list_pet" method="post">
+      {% csrf_token %}
+      <div>
+        <label for="pet_name">Pet Name</label>
+        <input type="text" name="pet_name" />
+      </div>
+      <div>
+        <label for="pet_pic">Pet Pic</label>
+        <input type="text" name="pet_pic" />
+      </div>
+      <button type="submit">List Pet!</button>
+    </form>
+    <hr />
+    <h3>Pets 4 Sale</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Pet Name</th>
+          <th>Image</th>
+          <th>Date listed</th>
+          <th>Listed By</th>
+          <th>Sell it</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for single_pet in all_pets_for_sale %}
+        <tr>
+          <td>{{ single_pet.pet_name }}</td>
+          <td>
+            <img
+              src="{{ single_pet.pet_pic_url }}"
+              alt="profile pic"
+              style="height: 50px"
+            />
+          </td>
+          <td>{{ single_pet.created_at }}</td>
+          <td>{{ single_pet.posted_by.name }}</td>
+          <td><a href="/sell_pet/{{ single_pet.id }}">Sell it!</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <hr />
+    <h3>Sold Pets</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Pet Name</th>
+          <th>Image</th>
+          <th>Date list</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for single_pet in all_pets_sold %}
+        <tr>
+          <td>{{ single_pet.pet_name }}</td>
+          <td>
+            <img
+              src="{{ single_pet.pet_pic_url }}"
+              alt="profile pic"
+              style="height: 50px"
+            />
+          </td>
+          <td>{{ single_pet.updated_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
