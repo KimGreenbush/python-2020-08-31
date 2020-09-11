@@ -15,7 +15,7 @@
 - [x] table displaying sold pets - pet name, image url, date sold
 
 - [x] a user can list a pet - image url, pet name, is sold, listed by (1-m)
-- [ ] a user can like pet (m-m)
+- [x] a user can like pet (m-m)
 - [x] a user can mark a pet sold
 
 ## Plan

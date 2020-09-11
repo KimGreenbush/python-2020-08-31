@@ -18,7 +18,6 @@ def show_the_pets(request):
         'logged_in_user': User.objects.get(id=request.session['uuid']),
         # 'all_pets_list': Pet.objects.all(),
         'all_pets_for_sale': Pet.objects.filter(is_sold=False),
-        'all_pets_sold': Pet.objects.filter(is_sold=True),
     }
     return render(request, 'pets.html', context)
 
@@ -55,3 +54,38 @@ def sell_pet(request, pet_id):
     pet.is_sold = True
     pet.save()
     return redirect('/pets')
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
+
+def like_pet(request, pet_id):
+    # get the pet
+    pet = Pet.objects.get(id=pet_id)
+
+    # get the user
+    user = User.objects.get(id=request.session['uuid'])
+
+    # like the pet
+    pet.users_who_liked.add(user)
+    return redirect('/pets')
+
+
+def unlike_pet(request, pet_id):
+    # get the pet
+    pet = Pet.objects.get(id=pet_id)
+
+    # get the user
+    user = User.objects.get(id=request.session['uuid'])
+
+    # like the pet
+    pet.users_who_liked.remove(user)
+    return redirect('/pets')
+
+def show_sold_pets(request):
+    context = {
+      'all_pets_sold': Pet.objects.filter(is_sold=True)
+    }
+    return render(request, 'sold.html', context)

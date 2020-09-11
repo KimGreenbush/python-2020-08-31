@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="/pets">Pets 4 Sale</a></li>
+        <li><a href="/pets/sold">Sold Pets</a></li>
+      </ul>
+    </nav>
     <h1>Welcome to the Hello Pets!🐶</h1>
     <div>
       <h2>You are logged in as {{ logged_in_user.name }}</h2>
+      <a href="/logout">Logout</a>
       <img
         src="{{ logged_in_user.profile_pic_url }}"
         alt="profile pic"
@@ -40,6 +51,8 @@
           <th>Date listed</th>
           <th>Listed By</th>
           <th>Sell it</th>
+          <th>Likes</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -56,32 +69,16 @@
           <td>{{ single_pet.created_at }}</td>
           <td>{{ single_pet.posted_by.name }}</td>
           <td><a href="/sell_pet/{{ single_pet.id }}">Sell it!</a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <hr />
-    <h3>Sold Pets</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Pet Name</th>
-          <th>Image</th>
-          <th>Date list</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for single_pet in all_pets_sold %}
-        <tr>
-          <td>{{ single_pet.pet_name }}</td>
+          <td>{{ single_pet.users_who_liked.all | length }}</td>
           <td>
-            <img
-              src="{{ single_pet.pet_pic_url }}"
-              alt="profile pic"
-              style="height: 50px"
-            />
+            {% if logged_in_user in single_pet.users_who_liked.all %}
+            <a href="/unlike_pet/{{ single_pet.id }}"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+            {% else %}
+            <a href="/like_pet/{{ single_pet.id }}"
+              ><i class="fa fa-thumbs-up" aria-hidden="true"></i></i
+            ></a>
+            {% endif %}
           </td>
-          <td>{{ single_pet.updated_at }}</td>
         </tr>
         {% endfor %}
       </tbody>
