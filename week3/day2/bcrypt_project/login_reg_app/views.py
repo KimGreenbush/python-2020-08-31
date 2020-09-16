@@ -17,7 +17,7 @@ def show_dashboard(request):
     if 'uuid' not in request.session:
         return redirect('/')
     context = {
-        'user_name': User.objects.get(id=request.session['uuid']).name
+        'user_name': User.objects.get(id=request.session['uuid']).first_name
     }
 
     return render(request, 'dashboard.html', context)
@@ -44,7 +44,8 @@ def register(request):
         print('hash_browns: ', hash_browns)
         # create a user
         created_user = User.objects.create(
-            name=request.POST['user_name'],
+            first_name=request.POST['first_name'],
+            last_name=request.POST['last_name'],
             email=request.POST['email'],
             # password=request.POST['password']
             password=hash_browns

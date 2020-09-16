@@ -11,8 +11,11 @@ class UserManager(models.Manager):
     def register_validator(self, post_data):
         errors = {}
 
-        if len(post_data['user_name']) < 2:
-            errors["user_name"] = "User name should be at least 2 characters"
+        if len(post_data['first_name']) < 2:
+            errors["first_name"] = "Frist name should be at least 2 characters"
+
+        if len(post_data['last_name']) < 2:
+            errors["last_name"] = "Last name should be at least 2 characters"
 
         # email
         EMAIL_REGEX = re.compile(
@@ -57,7 +60,8 @@ class UserManager(models.Manager):
 
 
 class User(models.Model):
-    name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
