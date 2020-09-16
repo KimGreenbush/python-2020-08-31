@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from .models import Show
@@ -42,6 +43,13 @@ def show_edit(request, show_id):
 
 def create_a_show(request):
     print(request.POST)
+    # run validations first
+    errors_dictionary = Show.objects.show_validator(request.POST)
+    if len(errors_dictionary) > 0:
+        for key, value in errors_dictionary.items():
+            messages.error(request, value)
+        return redirect('/shows/new')
+
     # create a show
     created_show = Show.objects.create(
         title=request.POST['title'],
@@ -61,6 +69,13 @@ def show_destroy(request, show_id):
 
 
 def show_update(request, show_id):
+    # call the validator
+    errors_dictionary = Show.objects.edit_show_validator(request.POST, show_id)
+    if len(errors_dictionary) > 0:
+        for key, value in errors_dictionary.items():
+            messages.error(request, value)
+        return redirect(f'/shows/{show_id}/edit')
+
     update_this_show = Show.objects.get(id=show_id)
 
     update_this_show.title = request.POST['title']
