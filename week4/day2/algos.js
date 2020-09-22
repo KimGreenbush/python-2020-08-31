@@ -13,18 +13,31 @@
   rFact(6.8) = 720 (1*2*3*4*5*6)
 */
 
-// const num1 = 3
-// const expected1 = 6
-// // Explanation: 1*2*3 = 6
+const num1 = 3
+const expected1 = 6
+// Explanation: 1*2*3 = 6
 
-// const num2 = 6.8
-// const expected2 = 720
-// // Explanation: 1*2*3*4*5*6 = 720
+const num2 = 6.8
+const expected2 = 720
+// Explanation: 1*2*3*4*5*6 = 720
 
-// const num3 = 0
-// const expected3 = 1
+const num3 = 0
+const expected3 = 1
 
-function factorial(n) {}
+function factorial(n) {
+  // Termination Condition if it's bad data (not a number)
+  if (isNaN(parseInt(n))) {
+    return null
+  }
+
+  n = Math.floor(n)
+
+  // Base case
+  if (n <= 0) {
+    return 1
+  }
+  return n * factorial(n - 1)
+}
 
 /* ******************************************************************************** */
 
@@ -37,22 +50,45 @@ function factorial(n) {}
   starting with 0 and 1 as the first two numbers of the sequence.
 */
 
-// const num1 = 0
-// const expected1 = 0
+const num1 = 0
+const expected1 = 0
 
-// const num2 = 1
-// const expected2 = 1
+const num2 = 1
+const expected2 = 1
 
-// const num3 = 2
-// const expected3 = 1
+const num3 = 2
+const expected3 = 1
 
-// const num4 = 3
-// const expected4 = 2
+const num4 = 3
+const expected4 = 2
 
-// const num5 = 4
-// const expected5 = 3
+const num5 = 4
+const expected5 = 3
 
-// const num6 = 8
-// const expected6 = 21
+const num6 = 8
+const expected6 = 21
 
-function fibonacci(num) {}
+function fibonacciA(n) {
+  if (n < 0) {
+    return null
+  }
+
+  if (n < 2) {
+    return n
+  }
+  return fibonacciA(n - 1) + fibonacciA(n - 2)
+}
+
+function fibonacciB(n, memo = { 0: 0, 1: 1 }) {
+  if (n < 0) {
+    return null
+  }
+
+  if (memo[n] !== undefined) {
+    return memo[n]
+  }
+
+  memo[n] = fibonacciB(n - 1, memo) + fibonacciB(n - 2, memo)
+
+  return memo[n]
+}
