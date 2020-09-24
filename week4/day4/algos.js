@@ -20,4 +20,7 @@ const expected2 = 1
 const num3 = 25
 const expected3 = 7
 
+const num4 = 156 // 1+5+6 = 12 -> 1+2 = 3
+const expected4 = 3
+
 function sumToOneDigit(num) {}
